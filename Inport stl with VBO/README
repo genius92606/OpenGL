@@ -1,0 +1,73 @@
+This folder is helps us import .stl with VBO!
+
+It is for OpenGL C++ in VS2015
+
+Apart from the basic enviroment settings like some .libs including.
+
+and include some libraries like "gl/shared/gltools.h" , #include "gl/shared/math3d.h"
+
+Follow th step below!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+First, in the main.cpp
+
+You should include "VBO_InputStl.h" 
+
+
+
+Second, define how many objects do you have!!!!
+------------------------------------------------------------------------------------------------------
+#define NumOfObject 5   
+------------------------------------------------------------------------------------------------------
+
+
+
+
+Third, enter the .stl files
+------------------------------------------------------------------------------------------------------
+char pathname[NumOfObject][100] = { "Table.STL", "platform.STL", "nail.STL", "hand.STL", "box.STL" };
+------------------------------------------------------------------------------------------------------
+
+
+
+
+Initial declaration
+------------------------------------------------------------------------------------------------------
+VBO vbolist[NumOfObject];
+TempArray tvbo[NumOfObject];
+------------------------------------------------------------------------------------------------------
+
+
+
+
+In void SetupRC(){}     , you should type
+------------------------------------------------------------------------------------------------------
+for (int i = 0; i < NumOfObject; i++) {
+		InitVBO(vbolist[i], tvbo[i]);
+	}
+------------------------------------------------------------------------------------------------------
+in final
+
+
+
+
+
+In main(int argc, char* argv[]){}    ,you should type   
+------------------------------------------------------------------------------------------------------
+for (int i = 0; i<NumOfObject; i++) {
+
+		//initialize
+		vbolist[i].vertex = 0;
+		vbolist[i].normal = 0;
+		vbolist[i].triArray = NULL;
+
+		gotoxy(0, 7);
+		vbolist[i].triArray = LoadStlBinary(pathname[i], vbolist[i].nTriangles);
+	}
+
+	for (int i = 0; i < NumOfObject; i++)
+		TempToData(vbolist[i], tvbo[i]);
+------------------------------------------------------------------------------------------------------
+at first  (you can change 'LoadStlBinary' into 'LoadStlASCII' if you want )
+
+
